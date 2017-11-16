@@ -20,16 +20,16 @@ export function booksReducers(state = {
 }, action) {
     switch (action.type) {
         case "GET_BOOKS":
-            return {...state, books: [...state.books] }
-            break;
+            return {...state, books: [...state.books] };
+        break;
         case "POST_BOOK":
             return { books: [...state.books, ...action.payload] }
-            break;
+        break;
         case "DELETE_BOOK":
             const currentBookDelete = [...state.books]
             const indexToDelete = currentBookDelete.findIndex(book => { return book._id === action.payload._id })
             return { books: [...currentBookDelete.slice(0, indexToDelete), ...currentBookDelete.slice(indexToDelete + 1)] }
-            break;
+        break;
         case "UPDATE_BOOK":
             const currentBookToUpdate = [...state.books]
             const indexToUpdate = currentBookToUpdate.findIndex(book => {
@@ -42,7 +42,7 @@ export function booksReducers(state = {
             }
             console.log("What is it newBookToUpdate", newBookToUpdate);
             return { books: [...currentBookToUpdate.slice(0, indexToUpdate), newBookToUpdate, ...currentBookToUpdate.slice(indexToUpdate + 1)] }
-            break;
+        break;
     }
     return state;
 }
