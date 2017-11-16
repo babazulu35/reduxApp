@@ -46,9 +46,9 @@ render (
 )) */
 
 
-store.dispatch(updateBooks({
+/* store.dispatch(updateBooks({
     id: 2,
     title: 'ContiConti'
 }))
 
-store.dispatch(addToCart([{ id: 2 }]))
+store.dispatch(addToCart([{ id: 2 }])) */

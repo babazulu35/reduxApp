@@ -1475,12 +1475,12 @@ var store = (0, _redux.createStore)(_index2.default, middleware);
     ]
 )) */
 
-store.dispatch((0, _booksActions.updateBooks)({
+/* store.dispatch(updateBooks({
     id: 2,
     title: 'ContiConti'
-}));
+}))
 
-store.dispatch((0, _cartActions.addToCart)([{ id: 2 }]));
+store.dispatch(addToCart([{ id: 2 }])) */
 
 /***/ }),
 /* 22 */
@@ -19471,12 +19471,12 @@ exports.cartReducers = cartReducers;
 function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 
 function cartReducers() {
-    var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : { cart: [] };
+    var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : { carts: [] };
     var action = arguments[1];
 
     switch (action.type) {
         case "ADD_TO_CART":
-            return { cart: [].concat(_toConsumableArray(state.cart), _toConsumableArray(action.payload)) };
+            return { carts: [].concat(_toConsumableArray(state), _toConsumableArray(action.payload)) };
             break;
 
     }
@@ -40431,7 +40431,15 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactBootstrap = __webpack_require__(193);
 
+var _reactRedux = __webpack_require__(62);
+
+var _redux = __webpack_require__(15);
+
+var _cartActions = __webpack_require__(53);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -40449,6 +40457,17 @@ var BookItem = function (_React$Component) {
     }
 
     _createClass(BookItem, [{
+        key: 'handleCart',
+        value: function handleCart() {
+            var book = [].concat(_toConsumableArray(this.props.carts), [{
+                id: this.props.id,
+                title: this.props.title,
+                description: this.props.description,
+                price: this.props.price
+            }]);
+            this.props.addToCart(book);
+        }
+    }, {
         key: 'render',
         value: function render() {
             return _react2.default.createElement(
@@ -40478,7 +40497,7 @@ var BookItem = function (_React$Component) {
                         ),
                         _react2.default.createElement(
                             _reactBootstrap.Button,
-                            { bsStyle: 'primary' },
+                            { onClick: this.handleCart.bind(this), bsStyle: 'primary' },
                             'Buy Now'
                         )
                     )
@@ -40490,7 +40509,19 @@ var BookItem = function (_React$Component) {
     return BookItem;
 }(_react2.default.Component);
 
-exports.default = BookItem;
+function mapStateToProps(state) {
+    return {
+        carts: state.carts.carts
+    };
+}
+
+function mapDispatchToProps(dispatch) {
+    return (0, _redux.bindActionCreators)({
+        addToCart: _cartActions.addToCart
+    }, dispatch);
+}
+
+exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(BookItem);
 
 /***/ }),
 /* 334 */

@@ -2,10 +2,10 @@
 
 /* CART REDUCERS */
 
-export function cartReducers(state = { cart: [] }, action) {
+export function cartReducers(state = { carts: [] }, action) {
     switch (action.type) {
         case "ADD_TO_CART":
-            return { cart: [...state.cart, ...action.payload] }
+            return { carts: [...state, ...action.payload] }
             break;
 
     }
