@@ -9,6 +9,8 @@ import {Grid,Col,Row,Button} from 'react-bootstrap';
 import BookItem from './bookItem';
 import BooksForm from './booksForm';
 
+import Cart from './cart'
+
 class BooksList extends React.Component {
         componentDidMount() {
             //Dispatch an action
@@ -17,13 +19,16 @@ class BooksList extends React.Component {
         render() {
             const booksList = this.props.books.map( booksArr => {
                 return(
-                    <Col xs={12} sm={6} md={4} key={booksArr.id}  >
-                      <BookItem id={booksArr.id} title={booksArr.title} description={booksArr.description} price ={booksArr.price} />  
+                    <Col xs={12} sm={6} md={4} key={booksArr._id}  >
+                      <BookItem id={booksArr._id} title={booksArr.title} description={booksArr.description} price ={booksArr.price} />  
                     </Col>
                 )
             } )
             return ( 
             <Grid>
+                <Row>
+                    <Cart />
+                </Row>
                 <Row style={{marginTop:'15px'}}>
                     <Col xs={12} sm={6}>
                         <BooksForm />

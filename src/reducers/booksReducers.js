@@ -3,14 +3,14 @@
 /* BOOKS REDUCERS  */
 export function booksReducers(state = {
     books: [{
-            id: 1,
+            _id: 1,
             title: 'this is book title',
             description: 'this is the book desctription',
             price: 54.33
 
         },
         {
-            id: 2,
+            _id: 2,
             title: 'this issecond book title',
             description: 'this is second the book desctription',
             price: 23.33
@@ -27,13 +27,13 @@ export function booksReducers(state = {
             break;
         case "DELETE_BOOK":
             const currentBookDelete = [...state.books]
-            const indexToDelete = currentBookDelete.findIndex(book => { return book.id === action.payload.id })
+            const indexToDelete = currentBookDelete.findIndex(book => { return book._id === action.payload._id })
             return { books: [...currentBookDelete.slice(0, indexToDelete), ...currentBookDelete.slice(indexToDelete + 1)] }
             break;
         case "UPDATE_BOOK":
             const currentBookToUpdate = [...state.books]
             const indexToUpdate = currentBookToUpdate.findIndex(book => {
-                return book.id === action.payload.id
+                return book._id === action.payload._id
             })
 
             const newBookToUpdate = {
