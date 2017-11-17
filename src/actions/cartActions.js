@@ -15,3 +15,12 @@ export function deleteCartItem(id) {
         payload: id
     }
 }
+
+
+export function updateCart(id, unit) {
+    return {
+        type: "UPDATE_CART",
+        _id: id,
+        unit: unit
+    }
+}
